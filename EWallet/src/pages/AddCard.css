@@ -1,0 +1,83 @@
+/*.input-container {
+    margin-bottom: 10px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-container input,
+.input-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.input-row {
+    display: flex;
+}
+
+.input-row .input-container {
+    flex: 1;
+    margin-right: 20px; 
+    margin-left: 20px; 
+}
+
+
+button {
+    padding: 18px 186px;
+    margin: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}
+*/
+.input-container {
+    margin-bottom: 15px;
+}
+
+.input-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-container input,
+.input-container select {
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: block;
+    width: calc(100% - 22px); /* Adjusted to account for padding and border */
+}
+
+.input-row {
+    display: flex;
+}
+
+.input-row .input-container {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.input-row .input-container:last-child {
+    margin-right: 0;
+}
+
+button {
+    padding: 8px 170px;
+    border: none;
+    border-radius: 4px;
+    background-color:black;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
