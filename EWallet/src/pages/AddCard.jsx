@@ -1,8 +1,10 @@
 import React from 'react';
 import {useState} from 'react';
 import './AddCard.css';
-import VendorNinja from '../assets/vendor-ninja.svg';
-
+import SvgBasicPath from '../components/Card/SvgPaths/SvgBasicPath';
+import SvgBitcoinPath from '../components/Card/SvgPaths/SvgBitcoinPath';
+import SvgNingaPath from '../components/Card/SvgPaths/SvgNingaPath';
+import SvgBlockchainPath from '../components/Card/SvgPaths/SvgBlockchainPath';
 function AddCard(){
     const [formData, setFormData]= useState(
         {cardNumber: "", cardHolderName: "", validDates: "", cvv: "", vendor:""}
@@ -20,7 +22,13 @@ console.log(formData);
         })
     }
     return (
+       
         <section>
+        <h1>ADD A NEW BANK CARD</h1>
+        {/* <SvgBasicPath/>
+         <SvgBitcoinPath/>
+         <SvgNingaPath/>
+         <SvgBlockchainPath/>*/}
         <div className="input-container">
             <label>CARD NUMBER</label>
             <input
@@ -73,7 +81,7 @@ console.log(formData);
                 ))}
                 
             </select>
-            {formData.vendor=== 'NINJA BANK'&& <img src={VendorNinja} alt="Vendor Ninja" />}
+            {formData.vendor=== 'NINJA BANK'} 
         </div>
         <button>ADD CARD</button>
     </section>

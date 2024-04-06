@@ -1,12 +1,15 @@
 
 import './App.css'
-import AddCard from './pages/AddCard'; 
+import { RouterProvider } from 'react-router-dom';
+import router from './router/router';
 function App() {
  
 
   return (
    
-     <AddCard/>
+    <main>
+    <RouterProvider router={ router } />
+  </main>
     
   );
 }
