@@ -25,8 +25,9 @@ console.log(formData);
        
         <section>
         <h1>ADD A NEW BANK CARD</h1>
-        {/* <SvgBasicPath/>
-         <SvgBitcoinPath/>
+         <SvgBasicPath/>
+         
+        {/* <SvgBitcoinPath/>
          <SvgNingaPath/>
          <SvgBlockchainPath/>*/}
         <div className="input-container">

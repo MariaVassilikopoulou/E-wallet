@@ -1,7 +1,13 @@
 import React from "react";
 import "./SvgBasic.css";
-
+import { useSelector } from "react-redux";
 function SvgBasicPath(){
+    const { cardNumber, cardHolderName, validDates } = useSelector(
+        (state) => state.cards
+      );
+const month= validDates.split('/')[0];
+const year= validDates.split('/')[1];
+
     return (
         <div className='shape'>
             <svg className='logo' width="50" height="84" viewBox="0 0 50 84" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,12 +27,12 @@ function SvgBasicPath(){
 
     <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">XXXX XXXX XXXX XXXX </h3>
-            <h4 className="name">CARDHOLDER</h4>
+            <h3 className="number">XXXX XXXX XXXX XXXX{cardNumber}</h3>
+            <h4 className="name">CARDHOLDER{cardHolderName}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                    <h5>XX / XX</h5>
+                    <h5>XX{month} / XX{year}</h5>
                 </div>
     
     </div>
