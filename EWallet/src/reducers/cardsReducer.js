@@ -8,16 +8,19 @@ const cardsSlice= createSlice({
     initialState,
     reducers: {
         updateCardDetails(state,action){
-
-            const { cardNumber, cardHolderName, validdates , cvv, vendor}= action.payload;
-           state.cardNumber= cardNumber;
-           state.cardHolderName= cardHolderName;
-           state.validDates= validdates;
-           state.cvv= cvv;
-           state.vendor= vendor;
-        
-        }
-        }
+            console.log("State the Previous", state);
+            console.log("action the Payload", action.payload);
+            const { cardNumber, cardHolderName, validDates , cvv, vendor}= action.payload;
+            return {
+                ...state,
+                cardNumber,
+                cardHolderName,
+                validDates,
+                cvv,
+                vendor,
+        };
+        },
+    },
 });
 export const {updateCardDetails}= cardsSlice.actions;
 export default cardsSlice.reducer;

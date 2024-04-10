@@ -1,7 +1,26 @@
-import React from "react";
+import React,{useState} from "react";
 import "./SvgBasic.css";
+import { useSelector } from "react-redux";
 
 function SvgBitcoinPath(){
+    const { cardNumber, cardHolderName, validDates } = useSelector(
+        (state) => state.cards
+      );
+
+const [inputValue, setInputValue] = useState("");
+
+const handleInputChange = (event) => {
+      setInputValue(event.target.value.slice(0, 16));
+};
+
+const formatCardNumber = (value) => {
+    return value.padEnd(16, "X").slice(0, 16);
+};
+const formatDate=(value)=>{
+    return value.padEnd(7, "X").slice(0,7);
+
+}
+
     return (
         <div className='shape'>
             <svg className='logo' width="28" height="39" viewBox="0 0 28 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,14 +28,16 @@ function SvgBitcoinPath(){
 </svg>
 
 
-    <div className='card-details'>
+<div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">XXXX XXXX XXXX XXXX </h3>
-            <h4 className="name">CARDHOLDER</h4>
+            <h3 className="number">{formatCardNumber(inputValue || cardNumber)}</h3>
+            <label>CARDHOLDER</label>
+            <h4 className="name">{cardHolderName}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                    <h5>XX / XX</h5>
+                   {formatDate(inputValue || validDates)} 
+                   
                 </div>
     
     </div>

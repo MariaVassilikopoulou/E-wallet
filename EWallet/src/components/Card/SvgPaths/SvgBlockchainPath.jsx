@@ -1,6 +1,26 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './SvgBasic.css';
+import { useSelector } from "react-redux";
 function SvgBlockchainPath(){
+
+    const { cardNumber, cardHolderName, validDates } = useSelector(
+        (state) => state.cards
+      );
+
+const [inputValue, setInputValue] = useState("");
+
+const handleInputChange = (event) => {
+      setInputValue(event.target.value.slice(0, 16));
+};
+
+const formatCardNumber = (value) => {
+    return value.padEnd(16, "X").slice(0, 16);
+};
+const formatDate=(value)=>{
+    return value.padEnd(7, "X").slice(0,7);
+
+}
+
     return(
        
 <div className='shape'>
@@ -9,18 +29,22 @@ function SvgBlockchainPath(){
 <path d="M20.0252 11.9669C19.0883 11.0328 17.5726 11.0345 16.6374 11.9694C15.7001 12.9099 15.7022 14.4277 16.6399 15.3629C17.4485 16.1683 17.9081 17.0757 17.9366 17.9211C17.9637 18.7108 17.6086 19.4831 16.8802 20.2154L10.9018 26.2274C10.8982 26.232 10.8947 26.2348 10.8911 26.2384C10.1923 26.9372 9.45745 27.292 8.70765 27.2938C7.8459 27.2948 6.9107 26.836 6.07675 26.0024C5.12729 25.0526 3.83413 23.1576 5.83324 21.1474L8.77468 18.1985C8.89163 18.0815 8.92764 17.8651 8.86025 17.715C8.38213 16.6393 8.11045 15.5112 8.07087 14.3771C8.05554 13.9054 8.07907 13.4394 8.13933 12.9812C8.22597 12.3249 7.99957 12.1872 7.53214 12.6557L2.4365 17.7628C-0.902484 21.1192 -0.800514 25.9011 2.68607 29.3927C4.43097 31.1351 6.57199 32.0913 8.71657 32.0885C10.7524 32.0849 12.6763 31.2342 14.2821 29.6291C14.2889 29.622 14.2957 29.6152 14.3025 29.6084L20.2816 23.595C21.9566 21.9093 22.8027 19.8895 22.7285 17.7589C22.6608 15.6934 21.6996 13.6366 20.0252 11.9669Z" fill="white"/>
 </svg>
 
-    <div className='card-details'>
+<div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">XXXX XXXX XXXX XXXX </h3>
-            <h4 className="name">CARDHOLDER</h4>
+            <h3 className="number">{formatCardNumber(inputValue || cardNumber)}</h3>
+            <label>CARDHOLDER</label>
+            <h4 className="name">{cardHolderName}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                    <h5>XX / XX</h5>
+                   {formatDate(inputValue || validDates)} 
+                   
                 </div>
     
     </div>
 </div>
+    
+    
 );
 }
 export default SvgBlockchainPath;

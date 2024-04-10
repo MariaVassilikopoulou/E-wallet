@@ -1,92 +1,142 @@
-import React from 'react';
-import {useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddCard.css';
 import SvgBasicPath from '../components/Card/SvgPaths/SvgBasicPath';
-import SvgBitcoinPath from '../components/Card/SvgPaths/SvgBitcoinPath';
-import SvgNingaPath from '../components/Card/SvgPaths/SvgNingaPath';
-import SvgBlockchainPath from '../components/Card/SvgPaths/SvgBlockchainPath';
+import {useSelector,useDispatch} from 'react-redux';
+import {updateCardDetails} from '../reducers/cardsReducer';
+import Card from '../components/Card/Card'
+import Home from '../pages/Home';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 function AddCard(){
-    const [formData, setFormData]= useState(
-        {cardNumber: "", cardHolderName: "", validDates: "", cvv: "", vendor:""}
-        );
+    const dispatch = useDispatch();
+    const navigateTo = useNavigate();
+   
+    const [formData, setFormData] = useState({ 
+        cardNumber: "",
+        cardHolderName: "",
+        validDates: "", 
+        cvv: "", 
+        vendor: ""
+ });
 
-        const vendorOptions= ["BITCOIN INC", "NINJA BANK", "BLOCK CHAIN INC", "EVIL CORP"];
-console.log(formData);
+useEffect(() => {
+        dispatch(updateCardDetails(formData));
+    }, [formData, dispatch]);
 
-    function handleChange(event){
-        setFormData(prevFormData => {
-            return {
-                ...prevFormData,
-                [event.target.name]: event.target.value
-            }
-        })
-    }
+  
+
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+      setFormData(prevFormData => ({
+          ...prevFormData,
+          [name]: value
+        }));
+      };
+      const handleVendorChange = (event) => {
+        const { name, value } = event.target;
+       
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          [name]: value,
+        }));
+       
+        dispatch(updateCardDetails({ ...formData, [name]: value }));
+      };
+
+        const handleAddCard=(event)=>{
+                event.preventDefault();
+        dispatch(updateCardDetails(formData));
+        const path = `/home?cardNumber=${formData.cardNumber}&cardHolderName=${formData.cardHolderName}&validDates=${formData.validDates}&cvv=${formData.cvv}&vendor=${formData.vendor}`;
+      setFormData({ 
+            cardNumber: "",
+            cardHolderName: "",
+            validDates: "",
+            cvv: "",
+            vendor: ""
+        });
+        navigateTo(path);
+    };
+
+
+    
     return (
        
+        
         <section>
-        <h1>ADD A NEW BANK CARD</h1>
-         <SvgBasicPath/>
-         
-        {/* <SvgBitcoinPath/>
-         <SvgNingaPath/>
-         <SvgBlockchainPath/>*/}
-        <div className="input-container">
-            <label>CARD NUMBER</label>
-            <input
-                type="text"
-                placeholder="xxxxxxxxxxx"
-                onChange={handleChange}
-                name="cardNumber"
-                value={formData.cardNumber}
+          <h1>ADD A NEW BANK CARD</h1>
+          <div className="credit-card">
+          {formData.vendor ? <Card formData={formData} /> : 
+                              <SvgBasicPath formData={formData} />}
+          </div>
+          <form onSubmit={handleAddCard}>
+          <div className="form-group">
+            <label htmlFor="cardNumber">Card Number:</label>
+            <input 
+              type="text" 
+              id="cardNumber"
+              placeholder="XXXX XXXX XXXX XXXX" 
+              name="cardNumber" 
+              value={formData.cardNumber} 
+              onChange={handleChange}
+          
             />
-        </div>
-        <div className="input-container">
-            <label>CARDHOLDER NAME</label>
-            <input
-                type="text"
-                placeholder="FIRSTNAME LASTNAME"
-                onChange={handleChange}
-                name="cardHolderName"
-                value={formData.cardHolderName}
+          </div>
+          <div className="form-group">
+            <label htmlFor="cardHolderName">Cardholder Name:</label>
+            <input 
+              type="text"
+              id="cardHolderName"
+              placeholder="CARDHOLDER"
+              name="cardHolderName"
+              value={formData.cardHolderName}
+              onChange={handleChange}
             />
-        </div>
-        <div className="input-row">
-        <div className="input-container">
-            <label>VALID THRU</label>
-            <input
-                type="text"
-                placeholder="mm/yyyy"
-                onChange={handleChange}
-                name="validDates"
-                value={formData.validDates}
+          </div>
+          <div className="form-group">
+            <label htmlFor="validDates">Valid Thru (mm/yyyy):</label>
+            <input 
+              type="text"
+              id="validDates"
+              placeholder="mm/yyyy"
+              name="validDates"
+              value={formData.validDates}
+              onChange={handleChange}
             />
-        </div>
-        <div className="input-container">
-            <label>CCV</label>
-            <input
-                type="text"
-                placeholder="XXX"
-                onChange={handleChange}
-                name="cvv"
-                value={formData.cvv}
+          </div>
+          <div className="form-group">
+            <label htmlFor="cvv">CVV:</label>
+            <input 
+              type="text"
+              id="cvv"
+              placeholder="CVV"
+              name="cvv"
+              value={formData.cvv}
+              onChange={handleChange}
             />
-               </div>
-        </div>
-        <div className="input-container">
-            <label>VENDOR</label>
-            <select value={formData.vendor}
-                 onChange={handleChange} 
-                 name="vendor" >
-                {vendorOptions.map((option)=>(
-                    <option key={option} value= {option}>{option}</option>
-                ))}
-                
+          </div>
+          <div className="form-group">
+            <label htmlFor="vendor">Vendor:</label>
+            <select 
+              id="vendor"
+              name="vendor" 
+              value={formData.vendor}
+              onChange={handleVendorChange}
+              
+            >
+                <option value="">Select Vendor</option>
+                <option value="BITCOIN INC">BITCOIN INC</option>
+                <option value="NINJA BANK">NINJA BANK</option>
+                <option value="BLOCK CHAIN INC">BLOCK CHAIN INC</option>
+                <option value="EVIL CORP">EVIL CORP</option>
             </select>
-            {formData.vendor=== 'NINJA BANK'} 
-        </div>
-        <button>ADD CARD</button>
-    </section>
-    
+          </div>
+          <button type="submit">ADD CARD</button>
+          </form>
+        </section>
+      
 );
 }
-export default AddCard
+export default AddCard;

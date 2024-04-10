@@ -1,23 +1,27 @@
-import {useLocation,useNavigate} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import React from 'react';
+import SvgBitcoinPath from './SvgPaths/SvgBitcoinPath';
+import SvgNingaPath from './SvgPaths/SvgNingaPath';
+import SvgBasicPath from './SvgPaths/SvgBasicPath';
+import SvgBlockchainPath from './SvgPaths/SvgBlockchainPath';
+import SvgEvilPath from './SvgPaths/SvgEvilPath';
 
-function Card(props){
-    const {card}= props;
-    const cardInfo = useLocation();
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    console.log(props);
-    console.log= (cardInfo);
 
-    function handleClick(){
-       navigate('/info', {state: {event:cardInfo.state.event}});
-            
-        }
-        return (
-            <section>
-                
-            </section>
-        )
+const Card = ({ formData }) => {
+    switch (formData.vendor) {
+        
+        case "NINJA BANK":
+            return <SvgNingaPath formData={formData} />;
+        case "BITCOIN INC":
+            return <SvgBitcoinPath formData={formData} />;
+        case "BLOCK CHAIN INC":
+            return <SvgBlockchainPath formData={formData} />;
+        case "EVIL CORP":
+            return <SvgEvilPath formData={formData} />;
+        default:
+            return null; 
     }
-    
+};
+
 export default Card;
+
+
