@@ -18,10 +18,9 @@ const Card = ({ formData }) => {
         case "EVIL CORP":
             return <SvgEvilPath formData={formData} />;
         default:
-            return null; 
+            return <SvgBasicPath formData={formData}/>;; 
     }
 };
 
 export default Card;
-
 

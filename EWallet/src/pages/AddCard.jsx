@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './AddCard.css';
 import SvgBasicPath from '../components/Card/SvgPaths/SvgBasicPath';
-import {useSelector,useDispatch} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {updateCardDetails} from '../reducers/cardsReducer';
 import Card from '../components/Card/Card'
-import Home from '../pages/Home';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -21,7 +20,7 @@ function AddCard(){
         cvv: "", 
         vendor: ""
  });
-
+ const [cards, setCards] = useState([]);
 useEffect(() => {
         dispatch(updateCardDetails(formData));
     }, [formData, dispatch]);
@@ -35,36 +34,32 @@ useEffect(() => {
           [name]: value
         }));
       };
+
       const handleVendorChange = (event) => {
         const { name, value } = event.target;
-       
         setFormData((prevFormData) => ({
           ...prevFormData,
           [name]: value,
         }));
-       
-        dispatch(updateCardDetails({ ...formData, [name]: value }));
+       dispatch(updateCardDetails({ ...formData, [name]: value }));
       };
+
+
 
         const handleAddCard=(event)=>{
                 event.preventDefault();
-        dispatch(updateCardDetails(formData));
-        const path = `/home?cardNumber=${formData.cardNumber}&cardHolderName=${formData.cardHolderName}&validDates=${formData.validDates}&cvv=${formData.cvv}&vendor=${formData.vendor}`;
-      setFormData({ 
-            cardNumber: "",
-            cardHolderName: "",
-            validDates: "",
-            cvv: "",
-            vendor: ""
-        });
-        navigateTo(path);
-    };
+       dispatch(updateCardDetails(formData));
+       setCards(prevCards => [...prevCards, formData]);
+        navigateTo('/home',{ state: { formData } });
+            };
 
-
-    
+       /* useEffect(() => {
+          if (formData.vendor) {
+              navigateTo('/home');
+          }
+      }, [formData.vendor, navigateTo]);*/
+  
     return (
-       
-        
         <section>
           <h1>ADD A NEW BANK CARD</h1>
           <div className="credit-card">
@@ -81,7 +76,6 @@ useEffect(() => {
               name="cardNumber" 
               value={formData.cardNumber} 
               onChange={handleChange}
-          
             />
           </div>
           <div className="form-group">
