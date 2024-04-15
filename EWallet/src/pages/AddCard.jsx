@@ -46,16 +46,20 @@ useEffect(() => {
 
 
 
-        const handleAddCard=(event)=>{
-                event.preventDefault();
-       dispatch(updateCardDetails(formData));
-       setCards(prevCards => [...prevCards, formData]);
-        navigateTo('/home',{ state: { formData } });
-            };
+    const handleAddCard=(event)=>{
+    event.preventDefault();
+    dispatch(updateCardDetails(formData));
+    setCards(prevCards => [...prevCards, formData]);
+    if (!localStorage.getItem("initialCard")) {
+      localStorage.setItem("initialCard", JSON.stringify(formData));
+    }
+  
+    navigateTo("/", { state: { formData } });
+  };
 
        /* useEffect(() => {
           if (formData.vendor) {
-              navigateTo('/home');
+              navigateTo('/');
           }
       }, [formData.vendor, navigateTo]);*/
   

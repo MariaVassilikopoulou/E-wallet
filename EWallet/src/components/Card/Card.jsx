@@ -7,10 +7,12 @@ import SvgEvilPath from './SvgPaths/SvgEvilPath';
 
 
 const Card = ({ formData }) => {
+    console.log("formData apo card", formData)
     switch (formData.vendor) {
         
         case "NINJA BANK":
             return <SvgNingaPath formData={formData} />;
+            
         case "BITCOIN INC":
             return <SvgBitcoinPath formData={formData} />;
         case "BLOCK CHAIN INC":
@@ -20,6 +22,7 @@ const Card = ({ formData }) => {
         default:
             return <SvgBasicPath formData={formData}/>;; 
     }
+   
 };
 
 export default Card;

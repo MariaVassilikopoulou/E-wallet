@@ -39,13 +39,14 @@ const formatDate=(value)=>{
 
     <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">{formatCardNumber(inputValue || cardNumber)}</h3>
+            <h3 className="number">{inputValue ? formatCardNumber(inputValue) : 'XXXX XXXX XXXX XXXX'}</h3>
             <label>CARDHOLDER</label>
-            <h4 className="name">{cardHolderName}</h4>
+            <h4 className="name">{inputValue ? cardHolderName : ''}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                   {formatDate(inputValue || validDates)} 
+                    <p>{inputValue ? formatDate(validDates) : 'XXXX XXXX'}</p>
+
                    
                 </div>
     
