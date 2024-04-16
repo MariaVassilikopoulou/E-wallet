@@ -34,11 +34,13 @@ function Home(){
             };
           }, []);
 
+          
     return(<>
         <h1>E-WALLET</h1>
         <div className="credit-card">
                 <SvgBasicPath />
-                {initialCardData && <Card formData={initialCardData} />}
+                {initialCardData && <Card formData={initialCardData}/>} 
+                  <Card formData={formDataFromRedux} />
         </div>   
         {cards.map((card,index)=>(<Card key={index} cardData={card}/>)) }
          
