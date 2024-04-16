@@ -2,11 +2,9 @@ import React,{useState} from "react";
 import "./SvgBasic.css";
 import { useSelector } from "react-redux";
 
-function SvgBitcoinPath(){
-    const { cardNumber, cardHolderName, validDates } = useSelector(
-        (state) => state.cards
-      );
-
+function SvgBitcoinPath({formData}){
+    const { cardNumber, cardHolderName, validDates } = formData ;
+    console.log(formData);
 const [inputValue, setInputValue] = useState("");
 
 const handleInputChange = (event) => {
@@ -14,10 +12,10 @@ const handleInputChange = (event) => {
 };
 
 const formatCardNumber = (value) => {
-    return value.padEnd(16, "X").slice(0, 16);
+    return (value || "").padEnd(16, "X").slice(0, 16);
 };
 const formatDate=(value)=>{
-    return value.padEnd(7, "X").slice(0,7);
+    return (value || "").padEnd(7, "X").slice(0,7);
 
 }
 
@@ -30,7 +28,7 @@ const formatDate=(value)=>{
 
 <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">{formatCardNumber(inputValue || cardNumber)}</h3>
+            <h3 className="number">{formatCardNumber(cardNumber)}</h3>
             <label>CARDHOLDER</label>
             <h4 className="name">{cardHolderName}</h4>
         </div>

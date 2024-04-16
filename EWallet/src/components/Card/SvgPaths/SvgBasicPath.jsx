@@ -2,10 +2,9 @@ import React, {useState}  from "react";
 import "./SvgBasic.css";
 import { useSelector } from "react-redux";
 
-function SvgBasicPath(){
-    const { cardNumber, cardHolderName, validDates } = useSelector(
-        (state) => state.cards
-      );
+function SvgBasicPath({ formData }){
+    const { cardNumber, cardHolderName, validDates } = formData || {};
+
 
 const [inputValue, setInputValue] = useState("");
 
@@ -39,13 +38,13 @@ const formatDate=(value)=>{
 
     <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">{inputValue ? formatCardNumber(inputValue) : 'XXXX XXXX XXXX XXXX'}</h3>
+            <h3 className="number">{cardNumber ? formatCardNumber(cardNumber) : 'XXXX XXXX XXXX XXXX'}</h3>
             <label>CARDHOLDER</label>
-            <h4 className="name">{inputValue ? cardHolderName : ''}</h4>
+            <h4 className="name">{cardHolderName ? cardHolderName : ''}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                    <p>{inputValue ? formatDate(validDates) : 'XXXX XXXX'}</p>
+                    <p>{validDates ? formatDate(validDates) : 'XXXX XXXX'}</p>
 
                    
                 </div>

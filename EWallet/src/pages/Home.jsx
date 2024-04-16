@@ -1,45 +1,38 @@
 import React from "react";
 import{useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import SvgBasicPath from "../components/Card/SvgPaths/SvgBasicPath";
 import { useLocation } from 'react-router-dom';
 import Card from "../components/Card/Card.jsx";
 
 function Home(){
 
-   /*const location = useLocation();
-   console.log("ti location: ", location);
-const searchParams = new URLSearchParams(location.search);
-console.log("searchparams: ", searchParams);
-const vendor = searchParams.get('vendor');
-console.log("ti vendor eisai: ", vendor);
-  const [cards,setCards]= useState([]);
-  const formData = location.state?.formData || {};
-  console.log("AYTO TO FORM:", formData);*/
-
   const location = useLocation();
-  
-  const [cards, setCards] = useState([]);
+  const formDataFromRedux = useSelector(state => state.cards);
+  const [cards, setCards] = useState([formDataFromRedux]);
   const [formData, setFormData] = useState({});
   const [initialCardData, setInitialCardData] = useState(null); 
- /*const formData = location.state?.formData || {};
-  console.log("ti skata form ERXERTE APO HOME: ", formData);*/
  
-      /*  const addCard=(newCard)=>{
-            setCards([...cards,newCard]);
-        };
-        console.log("koita edw: ", addCard);*/
+
         useEffect(() => {
-            const storedInitialCard = localStorage.getItem('initialCard'); // Retrieve card data from local storage
+            const storedInitialCard = localStorage.getItem('initialCard');
             if (storedInitialCard) {
               /*setFormData(JSON.parse(userCard));*/
               setInitialCardData(JSON.parse(storedInitialCard)); 
             }
           }, []);
         
-          const handleAddCard = (newCard) => {
-            setCards([...cards, newCard]);
-          };
+     
+         useEffect(() => {
+            setCards([...cards, formDataFromRedux]);
+            setFormData({});
+        }, [formDataFromRedux]);
         
+        useEffect(() => {
+            return () => {
+              setFormData({});
+            };
+          }, []);
 
     return(<>
         <h1>E-WALLET</h1>

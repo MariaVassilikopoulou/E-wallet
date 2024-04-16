@@ -7,7 +7,10 @@ import SvgEvilPath from './SvgPaths/SvgEvilPath';
 
 
 const Card = ({ formData }) => {
-    console.log("formData apo card", formData)
+    /*console.log("formData apo card", formData)*/
+    if (!formData || !formData.vendor) {
+        return null; 
+    }
     switch (formData.vendor) {
         
         case "NINJA BANK":

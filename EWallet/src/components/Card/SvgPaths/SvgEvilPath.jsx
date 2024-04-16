@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 
-function SvgEvilPath(){
-    const { cardNumber, cardHolderName, validDates } = useSelector(
-        (state) => state.cards
-      );
+function SvgEvilPath({formData}){
+    const { cardNumber, cardHolderName, validDates } = formData ;
 
 const [inputValue, setInputValue] = useState("");
 
@@ -13,10 +11,10 @@ const handleInputChange = (event) => {
 };
 
 const formatCardNumber = (value) => {
-    return value.padEnd(16, "X").slice(0, 16);
+    return (value || "").padEnd(16, "X").slice(0, 16);
 };
 const formatDate=(value)=>{
-    return value.padEnd(7, "X").slice(0,7);
+    return (value || "").padEnd(7, "X").slice(0,7);
 
 }
 
@@ -27,13 +25,13 @@ return(
 </svg>
 <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">{formatCardNumber(inputValue || cardNumber)}</h3>
+            <h3 className="number">{formatCardNumber(cardNumber || cardNumber)}</h3>
             <label>CARDHOLDER</label>
             <h4 className="name">{cardHolderName}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                   {formatDate(inputValue || validDates)} 
+                   {formatDate(validDates || validDates)} 
                    
                 </div>
     

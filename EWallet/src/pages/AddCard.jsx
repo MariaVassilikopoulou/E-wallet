@@ -20,10 +20,7 @@ function AddCard(){
         cvv: "", 
         vendor: ""
  });
- const [cards, setCards] = useState([]);
-useEffect(() => {
-        dispatch(updateCardDetails(formData));
-    }, [formData, dispatch]);
+
 
   
 
@@ -33,6 +30,7 @@ useEffect(() => {
           ...prevFormData,
           [name]: value
         }));
+        
       };
 
       const handleVendorChange = (event) => {
@@ -49,19 +47,17 @@ useEffect(() => {
     const handleAddCard=(event)=>{
     event.preventDefault();
     dispatch(updateCardDetails(formData));
-    setCards(prevCards => [...prevCards, formData]);
-    if (!localStorage.getItem("initialCard")) {
-      localStorage.setItem("initialCard", JSON.stringify(formData));
-    }
-  
+    setFormData({
+      cardNumber: '',
+      cardHolderName: '',
+      validDates: '',
+      cvv: '',
+      vendor: '',
+    });
     navigateTo("/", { state: { formData } });
   };
 
-       /* useEffect(() => {
-          if (formData.vendor) {
-              navigateTo('/');
-          }
-      }, [formData.vendor, navigateTo]);*/
+ 
   
     return (
         <section>
