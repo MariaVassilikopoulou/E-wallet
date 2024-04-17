@@ -1,26 +1,40 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const initialState= {
-    cardNumber:'', cardHolderName:'', validDates:'', cvv:'', vendor:''
+const initialCard = {
+  cardNumber: "XXXX XXXX XXXX XXXX ",
+  cardHolderName: "",
+  validDates: "XXXX XXXX",
+  cvv: "InitialCVV",
+  vendor: "InitialVendor"
 };
-const cardsSlice= createSlice({
-    name:'cards',
-    initialState,
-    reducers: {
-        updateCardDetails(state,action){
-            console.log("State the Previous", state);
-            console.log("action the Payload", action.payload);
-            const { cardNumber, cardHolderName, validDates , cvv, vendor}= action.payload;
-            return {
-                ...state,
-                cardNumber,
-                cardHolderName,
-                validDates,
-                cvv,
-                vendor,
-        };
-        },
+
+const initialState={
+  cards: [initialCard],
+  activeCardNumber: ""
+};
+export const cardsSlice = createSlice({
+  name: 'cards',
+  initialState,
+  reducers: {
+    addCard(state, action) {
+      state.cards.push(action.payload);
+      console.log("Adding card:", action.payload);
+console.log("Updated state:", state);
     },
+    updateNewCard(state, action) {
+      const { cardNumber, updatedData } = action.payload;
+      const cardIndex = state.cards.findIndex(card => card.cardNumber === cardNumber);
+      if (cardIndex !== -1) {
+        state.cards[cardIndex] = { ...state.cards[cardIndex], ...updatedData };
+        if (state.activeCardNumber === cardNumber) {
+          state.activeCardNumber = "";}
+      }},
+    setActiveCard(state, action) {
+      state.activeCardNumber = action.payload;
+    },
+  },
 });
-export const {updateCardDetails}= cardsSlice.actions;
-export default cardsSlice.reducer;
+
+    export const { addCard, updateNewCard, setActiveCard } = cardsSlice.actions;
+
+    export default cardsSlice.reducer;

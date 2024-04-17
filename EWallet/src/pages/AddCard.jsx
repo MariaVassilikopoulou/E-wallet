@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './AddCard.css';
 import SvgBasicPath from '../components/Card/SvgPaths/SvgBasicPath';
 import {useDispatch} from 'react-redux';
-import {updateCardDetails} from '../reducers/cardsReducer';
+import { addCard, updateNewCard, setActiveCard} from '../reducers/cardsReducer';
 import Card from '../components/Card/Card'
 import { useNavigate } from 'react-router-dom';
 
@@ -39,21 +39,25 @@ function AddCard(){
           ...prevFormData,
           [name]: value,
         }));
-       dispatch(updateCardDetails({ ...formData, [name]: value }));
+       /*dispatch(addCard({ ...formData, [name]: value }));*/
       };
 
 
 
     const handleAddCard=(event)=>{
     event.preventDefault();
-    dispatch(updateCardDetails(formData));
-    setFormData({
+   dispatch(addCard(formData));
+   console.log("this is the formdata", formData);
+    dispatch(updateNewCard({ cardNumber: formData.cardNumber, updatedData: formData }));
+    dispatch(setActiveCard(formData.cardNumber));
+    setFormData(prevFormData => ({
+      ...prevFormData,
       cardNumber: '',
       cardHolderName: '',
       validDates: '',
       cvv: '',
       vendor: '',
-    });
+    }));
     navigateTo("/", { state: { formData } });
   };
 
