@@ -1,9 +1,10 @@
 import React,{useState, useEffect} from "react";
 import { useSelector,useDispatch} from 'react-redux';
 import SvgBasicPath from "../components/Card/SvgPaths/SvgBasicPath";
-import { useLocation } from 'react-router-dom';
+import { useLocation,  useNavigate } from 'react-router-dom';
 import Card from "../components/Card/Card.jsx";
 import { setActiveCard } from '../reducers/cardsReducer';
+
 
 function Home(){
 
@@ -12,11 +13,12 @@ function Home(){
  /* const [cards, setCards] = useState([formDataFromRedux]);*/
   const [formData, setFormData] = useState({});
   const [initialCardData, setInitialCardData] = useState(null); 
+  console.log("koita edw",setInitialCardData);
   const cardsState = useSelector((state) => state.cards);
   const { cards } = cardsState;
   const dispatch = useDispatch();
-  
-
+  const navigateTo= useNavigate();
+ 
           //fetching the initial card
         useEffect(() => {
             const storedInitialCard = localStorage.getItem('initialCard');
@@ -41,7 +43,9 @@ function Home(){
 
 
           const handleCardClick = (cardData) => {
-            dispatch(setActiveCardAction(cardData));
+            dispatch(setActiveCard(cardData));
+            setInitialCardData(cardData);
+            console.log("card data", cardData)
           };
           
     return (
@@ -52,7 +56,7 @@ function Home(){
           <Card key={index} formData={card} onClick={() => handleCardClick(card)} />
         ))}
         </div>
-        <button onClick={() => window.location.href = '/card'}>ADD A NEW CARD</button>
+        <button onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
       </>
     );
   }
