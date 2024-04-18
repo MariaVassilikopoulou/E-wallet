@@ -42,18 +42,20 @@ function Home(){
           }, []);
 
 
-          const handleCardClick = (cardData) => {
+          /*const handleCardClick = (cardData) => {
             dispatch(setActiveCard(cardData));
             setInitialCardData(cardData);
             console.log("card data", cardData)
-          };
+          };*/
+          
+
           
     return (
       <>
         <h1>E-WALLET</h1>
         <div className="credit-card">
         {cards.map((card, index) => (
-          <Card key={index} formData={card} onClick={() => handleCardClick(card)} />
+          <Card key={index} formData={card}  />
         ))}
         </div>
         <button onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>

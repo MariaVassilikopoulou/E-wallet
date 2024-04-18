@@ -1,10 +1,12 @@
 import React, {useState}  from "react";
 import "./SvgBasic.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setActiveCard } from "../../../reducers/cardsReducer";
 
 function SvgBasicPath({ formData }){
     const { cardNumber, cardHolderName, validDates } = formData || {};
 
+   const dispatch = useDispatch();
 
 const [inputValue, setInputValue] = useState("");
 
@@ -19,8 +21,16 @@ const formatDate=(value)=>{
     return value.padEnd(7, "X").slice(0,7);
 
 }
+
+const handleCardClick = (cardData) => {
+    dispatch(setActiveCard(cardData));
+    /*setInitialCardData(cardData);*/
+    console.log("card data", cardData)
+  };
+  
+
     return (
-        <div className='shape'>
+        <div className='shape' onClick={() => handleCardClick(formData)}>
             <svg className='logo' width="50" height="84" viewBox="0 0 50 84" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect y="44" width="50" height="40" rx="8" fill="#ECE6DF"/>
 <line y1="56.5" x2="18" y2="56.5" stroke="black" strokeOpacity="0.11"/>
