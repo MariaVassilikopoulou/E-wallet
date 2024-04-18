@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch } from 'react-redux';
 import { setActiveCard } from "../../../reducers/cardsReducer";
-function SvgEvilPath({formData}){
+
+function SvgEvilPath({formData, setCards }){
     const { cardNumber, cardHolderName, validDates } = formData ;
 
 const dispatch = useDispatch();
 const [inputValue, setInputValue] = useState("");
-
+const [initialCardData, setInitialCardData] = useState(null); 
 const handleInputChange = (event) => {
       setInputValue(event.target.value.slice(0, 16));
 };
@@ -21,9 +22,10 @@ const formatDate=(value)=>{
 
 const handleCardClick = (cardData) => {
     dispatch(setActiveCard(cardData));
-    /*setInitialCardData(cardData);*/
-    console.log("card data", cardData)
-  };
+    setInitialCardData(cardData);
+    localStorage.setItem('initialCard', JSON.stringify(cardData));
+   
+};
   
 
 

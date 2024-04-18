@@ -3,11 +3,11 @@ import "./SvgBasic.css";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveCard } from "../../../reducers/cardsReducer";
 
-function SvgBasicPath({ formData }){
+function SvgBasicPath({ formData, isActive  }){
     const { cardNumber, cardHolderName, validDates } = formData || {};
-
+    const [initialCardData, setInitialCardData] = useState(null); 
    const dispatch = useDispatch();
-
+   const [currentCardData, setCurrentCardData] = useState(formData);
 const [inputValue, setInputValue] = useState("");
 
 const handleInputChange = (event) => {
@@ -22,15 +22,23 @@ const formatDate=(value)=>{
 
 }
 
-const handleCardClick = (cardData) => {
+/*const handleCardClick = (cardData) => {
     dispatch(setActiveCard(cardData));
     /*setInitialCardData(cardData);*/
-    console.log("card data", cardData)
+    /*console.log("card data", cardData)
   };
-  
+  const handleCardClick = (cardData) => {
+    dispatch(setActiveCard(cardData));
+    setInitialCardData(cardData);
+    localStorage.setItem('initialCard', JSON.stringify(cardData));
+   
+};*/
+const handleCardClick = () => {
+    dispatch(setActiveCard(formData));
+};
 
     return (
-        <div className='shape' onClick={() => handleCardClick(formData)}>
+        <div className={isActive ? "active-card" : "shape"} onClick={handleCardClick}>
             <svg className='logo' width="50" height="84" viewBox="0 0 50 84" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect y="44" width="50" height="40" rx="8" fill="#ECE6DF"/>
 <line y1="56.5" x2="18" y2="56.5" stroke="black" strokeOpacity="0.11"/>

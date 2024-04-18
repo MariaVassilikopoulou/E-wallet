@@ -15,11 +15,15 @@ function Home(){
   const [initialCardData, setInitialCardData] = useState(null); 
   console.log("koita edw",setInitialCardData);
   const cardsState = useSelector((state) => state.cards);
-  const { cards } = cardsState;
+  const { cards,activeCardNumber } = cardsState;
   const dispatch = useDispatch();
   const navigateTo= useNavigate();
  
-          //fetching the initial card
+  
+  
+  //const initialCard = useSelector(state => state.cards[0]);    
+  const [activeCard, setActiveCard] = useState(null);
+  //fetching the initial card
         useEffect(() => {
             const storedInitialCard = localStorage.getItem('initialCard');
             if (storedInitialCard) {
@@ -31,6 +35,8 @@ function Home(){
           useEffect(() => {
             if (initialCardData) {
               setFormData(initialCardData);
+              setActiveCard(initialCardData);
+              // dispatch(setActiveCard(initialCardData.cardNumber));
             }
           }, [initialCardData]);
      
@@ -40,23 +46,29 @@ function Home(){
               setFormData({});
             };
           }, []);
-
-
-          /*const handleCardClick = (cardData) => {
-            dispatch(setActiveCard(cardData));
-            setInitialCardData(cardData);
-            console.log("card data", cardData)
-          };*/
+         
           
+          /*useEffect(() => {
+            if (activeCardNumber) {
+                const foundCard = cards.find(card => card.cardNumber === activeCardNumber);
+                setActiveCard(foundCard);
+            }
+        }, [activeCardNumber, cards]);*/
+        /*useEffect(() => {
+          setActiveCard(activeCardNumber ? activeCardNumber : initialCard);
+        }, [activeCardNumber, initialCard]);*/
+        useEffect(() => {
+          setActiveCard(activeCardNumber ? cards.find(card => card.cardNumber === activeCardNumber) : null);
+        }, [activeCardNumber, cards]);
 
-          
     return (
       <>
         <h1>E-WALLET</h1>
         <div className="credit-card">
         {cards.map((card, index) => (
-          <Card key={index} formData={card}  />
+          <Card key={index} formData={card} isActive={card.cardNumber === activeCardNumber} activeCardNumber={activeCardNumber} />
         ))}
+        
         </div>
         <button onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
       </>
