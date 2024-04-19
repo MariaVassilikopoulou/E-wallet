@@ -5,6 +5,7 @@ import {useDispatch} from 'react-redux';
 import { addCard, updateNewCard, setActiveCard} from '../reducers/cardsReducer';
 import Card from '../components/Card/Card'
 import { useNavigate } from 'react-router-dom';
+import HeaderComponent from '../components/HeaderComponent';
 
 
 
@@ -64,13 +65,13 @@ function AddCard(){
  
   
     return (
-        <section className='allForm'>
-          <h1 className='header'>ADD A NEW BANK CARD</h1>
-          <div className="credit-card">
+        <section className='allForm' >
+          <HeaderComponent/>
+          <div className="credit-card" >
           {formData.vendor ? <Card formData={formData} /> : 
                               <SvgBasicPath formData={formData} />}
           </div>
-          <form onSubmit={handleAddCard}>
+          <form onSubmit={handleAddCard}  style={{marginTop:"10px", marginRight:"10px" }}>
           <div className="form-group">
             <p className="cardDetails">CARD NUMBER </p>
             <input className='form-input'
@@ -133,7 +134,7 @@ function AddCard(){
                 <option value="EVIL CORP">EVIL CORP</option>
             </select>
           </div>
-          <button className='form-button' type="submit">ADD CARD</button>
+          <button className='form-button' type="submit"  style={{marginTop:"10px" }}>ADD CARD</button>
           </form>
         </section>
       

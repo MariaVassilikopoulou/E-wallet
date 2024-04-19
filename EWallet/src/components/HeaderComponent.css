@@ -1,0 +1,13 @@
+.headerPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.headerPage h1{
+    font-size: 35px;
+}
+
+.title{
+    text-align: center;
+}

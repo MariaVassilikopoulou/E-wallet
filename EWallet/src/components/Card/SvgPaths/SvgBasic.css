@@ -7,17 +7,27 @@
     border-radius: 28px;
     padding: 25px; 
     position: relative;
-   
+  
     
+}
+
+.homeButton {
+    padding: 15px 145px 15px 125px;
+    border-radius: 8px;
+    background-color:black;
+    color: white;
+    cursor: pointer;
 }
 
 .name-number{
     font-family: Arial, sans-serif;
     margin: auto;
+  
 }
 .card-details{
-    font-family: Arial, sans-serif;
-   
+   font-family: Arial, sans-serif;
+   font-weight: bold;
+   font-size: large;
 }
 .shape .card-details{
     
@@ -36,6 +46,7 @@
     font-family: Arial, sans-serif;
     margin-left: 5px;
     margin-right: 5px;
+   
 }
 .shape .card-details .valid-date {
     display: flex;

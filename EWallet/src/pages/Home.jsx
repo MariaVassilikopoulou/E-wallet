@@ -4,6 +4,7 @@ import SvgBasicPath from "../components/Card/SvgPaths/SvgBasicPath";
 import { useLocation,  useNavigate } from 'react-router-dom';
 import Card from "../components/Card/Card.jsx";
 import { setActiveCard } from '../reducers/cardsReducer';
+import HeaderComponent from "../components/HeaderComponent.jsx";
 
 
 function Home(){
@@ -62,18 +63,19 @@ function Home(){
         }, [activeCardNumber, cards]);
 
     return (
-      <><div className="home-container">
-        <h1 className="header">E-WALLET</h1>
-        <div className="credit-card">
-        {cards.map((card, index) => (
+      <>
+      <div className="home-container">
+         <HeaderComponent/>
+          <div className="credit-card">
+          {cards.map((card, index) => (
           <Card key={index} formData={card} isActive={card.cardNumber === activeCardNumber} activeCardNumber={activeCardNumber} />
-        ))}
-        
-        </div>
-        <div  className="homeButton">
-        <button onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
-        </div>
-        </div></>
+           ))}
+          </div>
+          
+            <button className="homeButton" style={{marginTop:"10px" }} onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
+         
+      </div>
+      </>
     );
   }
   
