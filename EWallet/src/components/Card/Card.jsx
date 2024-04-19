@@ -24,12 +24,11 @@ const Card = ({ formData, onClick, isActive,activeCardNumber }) => {
       } else {
     switch (currentCardData.vendor) {
         
-        case "NINJA BANK":
-            return <SvgNingaPath formData={currentCardData} onClick={handleClick} />;
-            
         case "BITCOIN INC":
             return <SvgBitcoinPath formData={currentCardData} onClick={handleClick}/>;
-        case "BLOCK CHAIN INC":
+            case "NINJA BANK":
+                return <SvgNingaPath formData={currentCardData} onClick={handleClick} />;
+            case "BLOCK CHAIN INC":
             return <SvgBlockchainPath formData={currentCardData} onClick={handleClick} />;
         case "EVIL CORP":
             return <SvgEvilPath formData={currentCardData} onClick={handleClick} />;

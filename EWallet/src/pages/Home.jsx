@@ -62,16 +62,18 @@ function Home(){
         }, [activeCardNumber, cards]);
 
     return (
-      <>
-        <h1>E-WALLET</h1>
+      <><div className="home-container">
+        <h1 className="header">E-WALLET</h1>
         <div className="credit-card">
         {cards.map((card, index) => (
           <Card key={index} formData={card} isActive={card.cardNumber === activeCardNumber} activeCardNumber={activeCardNumber} />
         ))}
         
         </div>
+        <div  className="homeButton">
         <button onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
-      </>
+        </div>
+        </div></>
     );
   }
   

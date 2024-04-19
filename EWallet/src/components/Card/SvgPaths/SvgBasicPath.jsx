@@ -38,8 +38,8 @@ const handleCardClick = () => {
 };
 
     return (
-        <div className={isActive ? "active-card" : "shape"} onClick={handleCardClick}>
-            <svg className='logo' width="50" height="84" viewBox="0 0 50 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <div className={isActive ? "active-card" : "shape"} onClick={handleCardClick}  style={{backgroundColor:"#d3d6db" ,textColor: "#eeeeee"}}>
+            <svg className='logo' style={{ marginLeft: '12px', marginBottom: "-35px" }} width="50" height="84" viewBox="0 0 50 84" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect y="44" width="50" height="40" rx="8" fill="#ECE6DF"/>
 <line y1="56.5" x2="18" y2="56.5" stroke="black" strokeOpacity="0.11"/>
 <line x1="33" y1="56.5" x2="50" y2="56.5" stroke="black" strokeOpacity="0.11"/>
@@ -58,7 +58,7 @@ const handleCardClick = () => {
         <div className='name-number'>
             <h3 className="number">{cardNumber ? formatCardNumber(cardNumber) : 'XXXX XXXX XXXX XXXX'}</h3>
             <label>CARDHOLDER</label>
-            <h4 className="name">{cardHolderName ? cardHolderName : ''}</h4>
+            <h4 className="name" >{cardHolderName ? cardHolderName : ''}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>

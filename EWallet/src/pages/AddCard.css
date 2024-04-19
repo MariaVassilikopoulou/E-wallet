@@ -1,45 +1,59 @@
-
-.input-container {
-    margin-bottom: 15px;
+form{
+    
+    margin-left: 20px;
 }
-
-.input-container label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.input-container input,
-.input-container select {
-    height: 30px;
-    padding: 0 10px;
-    border: 1px solid #444;
-    border-radius: 5px;
-    display: block;
-    width: calc(100% - 22px); 
-}
-
-.input-row {
+.form-group{
     display: flex;
+    flex-direction: column;
+}
+.form-group_{
+    display: flex;
+    justify-content:space-between;
+}
+.cardDetails{
+    font-size: 12px;
+    font-family: monospace;
+    margin: 1px;
+    color: rgba(60, 57, 57, 0.711);
 }
 
-.input-row .input-container {
-    flex: 1;
-    margin-right: 10px;
+.form-input{
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    border-radius: 8px;
+    border: 1px solid rgb(86, 85, 85);
+   
 }
 
-.input-row .input-container:last-child {
-    margin-right: 0;
+.form-select{
+    width: 100%;
+    padding: 10px 0px 10px 0px;
+    border-radius: 8px;
+    border: 1px solid rgb(86, 85, 85);
+    font-family: monospace;
 }
+
+
 
 button {
-    padding: 8px 170px;
-    border: none;
-    border-radius: 4px;
+    padding: 15px 145px;
+  
+    border-radius: 8px;
     background-color:black;
     color: white;
     cursor: pointer;
 }
 
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+& h1 {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
+}
 
 
 

@@ -64,16 +64,16 @@ function AddCard(){
  
   
     return (
-        <section>
-          <h1>ADD A NEW BANK CARD</h1>
+        <section className='allForm'>
+          <h1 className='header'>ADD A NEW BANK CARD</h1>
           <div className="credit-card">
           {formData.vendor ? <Card formData={formData} /> : 
                               <SvgBasicPath formData={formData} />}
           </div>
           <form onSubmit={handleAddCard}>
           <div className="form-group">
-            <label htmlFor="cardNumber">Card Number:</label>
-            <input 
+            <p className="cardDetails">CARD NUMBER </p>
+            <input className='form-input'
               type="text" 
               id="cardNumber"
               placeholder="XXXX XXXX XXXX XXXX" 
@@ -83,8 +83,8 @@ function AddCard(){
             />
           </div>
           <div className="form-group">
-            <label htmlFor="cardHolderName">Cardholder Name:</label>
-            <input 
+          <p className="cardDetails">CARDHOLDER NAME</p>
+            <input className='form-input'
               type="text"
               id="cardHolderName"
               placeholder="CARDHOLDER"
@@ -93,9 +93,10 @@ function AddCard(){
               onChange={handleChange}
             />
           </div>
+          <div className="form-group_">
           <div className="form-group">
-            <label htmlFor="validDates">Valid Thru (mm/yyyy):</label>
-            <input 
+          <p className="cardDetails">VALID</p>
+            <input className='form-input'
               type="text"
               id="validDates"
               placeholder="mm/yyyy"
@@ -105,8 +106,8 @@ function AddCard(){
             />
           </div>
           <div className="form-group">
-            <label htmlFor="cvv">CVV:</label>
-            <input 
+          <p className="cardDetails">CVV</p>
+            <input className='form-input'
               type="text"
               id="cvv"
               placeholder="CVV"
@@ -115,9 +116,10 @@ function AddCard(){
               onChange={handleChange}
             />
           </div>
+          </div>
           <div className="form-group">
-            <label htmlFor="vendor">Vendor:</label>
-            <select 
+          <p className="cardDetails">VENDOR</p>
+            <select className='form-select'
               id="vendor"
               name="vendor" 
               value={formData.vendor}
@@ -131,7 +133,7 @@ function AddCard(){
                 <option value="EVIL CORP">EVIL CORP</option>
             </select>
           </div>
-          <button type="submit">ADD CARD</button>
+          <button className='form-button' type="submit">ADD CARD</button>
           </form>
         </section>
       
