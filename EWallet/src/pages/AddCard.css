@@ -1,20 +1,21 @@
 form{
-    
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     margin-left: 10px;
 }
-.form-group{
-    display: flex;
-    flex-direction: column;
-}
+
 .form-group_{
     display: flex;
     justify-content:space-between;
 }
 .cardDetails{
-    font-size: 12px;
-    font-family: monospace;
-    margin: 1px;
-    color: rgba(60, 57, 57, 0.711);
+   
+    width: calc(100% - 50px);
+    margin-left: 15px;
+    display: flex;
+    bottom: 5px;
 }
 
 .form-input{

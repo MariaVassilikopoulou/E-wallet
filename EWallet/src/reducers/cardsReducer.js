@@ -1,11 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
+import ChipLight from '../assets/chip-light.svg';
 
 const initialCard = {
-  cardNumber: "XXXX XXXX XXXX XXXX ",
+  cardNumber: "XXXX ",
   cardHolderName: "",
-  validDates: "XXXX XXXX",
+  validDates: "XXXXX",
   cvv: "InitialCVV",
-  vendor: "InitialVendor"
+  vendor:"CHIP LIGHT"
 };
 
 const initialState={
@@ -36,13 +37,13 @@ console.log("Updated state:", state);
     setActiveCard(state, action) {
       state.activeCardNumber = action.payload;
       
-    /*const initialCardIndex = state.cards.findIndex(
+    const initialCardIndex = state.cards.findIndex(
         (card) => card.cardNumber === initialCard.cardNumber
         ); 
 
     if (initialCardIndex !== -1) {
           state.cards.splice(initialCardIndex, 1);
-        }*/
+        }
 
     },
   },

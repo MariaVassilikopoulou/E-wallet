@@ -1,23 +1,23 @@
 import React,{useState, useEffect} from "react";
 import { useSelector,useDispatch} from 'react-redux';
-import SvgBasicPath from "../components/Card/SvgPaths/SvgBasicPath";
+import SvgBasicPath from "../components/Card/svgPaths/SvgBasicPath.jsx";
 import { useLocation,  useNavigate } from 'react-router-dom';
 import Card from "../components/Card/Card.jsx";
 import { setActiveCard } from '../reducers/cardsReducer';
 import HeaderComponent from "../components/HeaderComponent.jsx";
 
 
+
 function Home(){
 
   const location = useLocation();
   const formDataFromRedux = useSelector(state => state.cards);
-  const cards = useSelector(state => state.cards.cards);// here i take the cards from the array i have in the redux
-  
+ 
   const [formData, setFormData] = useState({});
   const [initialCardData, setInitialCardData] = useState(null); 
-
-  const activeCardNumber  = useSelector((state) => state.cards);
-  //const selectActiveCard = state => state.cards.activeCardNumber
+  const cardsState = useSelector((state) => state.cards);
+  const { cards, activeCardNumber } = cardsState;
+ 
   const dispatch = useDispatch();
   const navigateTo= useNavigate();
   const [vendor, setVendor] = useState(null);
@@ -36,32 +36,30 @@ function Home(){
             }
           }, [initialCardData]);
      
-       /* useEffect(() => {
-          setActiveCard(activeCardNumber ? cards.find(card => card.cardNumber === activeCardNumber) : null);
-          setVendor(vendor);
-        }, [activeCardNumber, cards]);
-            console.log("useefect active", activeCard)*/
-
-            const filteredCards = activeCardNumber
-            ? cards.filter((card) => card.cardNumber !== activeCardNumber.cardNumber)
-            : cards;
-
+            useEffect(() => {
+              setActiveCard(
+                activeCardNumber
+                  ? cards.find((card) => card.cardNumber === activeCardNumber)
+                  : null
+              );
+            }, [activeCardNumber, cards]);
 
     return (
       <>
       <div className="home-container">
          <HeaderComponent/>
-
-          <div className="credit-card">
+       
+          <div className="credit-card" >
           {activeCard && <Card formData={activeCard} isActive={true} />}
         
-        {filteredCards.map((card) => (
+          {cards
+          .filter((card) => card.cardNumber !== activeCardNumber)
+          .map((card, index) => (
             <Card
-              key={card.cardNumber}
+              key={index}
               formData={card}
-              isActive={card && card.cardNumber === activeCardNumber}
+              isActive={card.cardNumber === activeCardNumber}
               activeCardNumber={activeCardNumber}
-              vendor={card && card.vendor} 
             />
           ))}
         </div>

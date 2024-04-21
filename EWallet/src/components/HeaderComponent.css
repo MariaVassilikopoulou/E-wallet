@@ -1,8 +1,7 @@
 .headerPage{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    
+    height: 300px;
+    
 }
 .headerPage h1{
     font-size: 35px;

@@ -38,19 +38,24 @@ function AddCard(){
           ...prevFormData,
           [name]: value,
         }));
-       /*dispatch(addCard({ ...formData, [name]: value }));*/
+    
       };
 
 
 
     const handleAddCard=(event)=>{
     event.preventDefault();
-   dispatch(addCard(formData));//it add the new card in redux
+   dispatch(addCard(formData));
    console.log("this is the formdata", formData);
-    //dispatch(updateNewCard({ cardNumber: formData.cardNumber, updatedData: formData }));
-    dispatch(setActiveCard(formData.cardNumber)); //the card is set as active card
+    
+    dispatch(setActiveCard(formData.cardNumber)); 
     setFormData((prevFormData) =>({
       ...prevFormData,
+      cardNumber: formData.cardNumber,
+      cardHolderName: formData.cardHolderName,
+      validDates: formData.validDates,
+      cvv: formData.cvv,
+      vendor: formData.vendor ,
      
      
    }));
@@ -73,7 +78,7 @@ function AddCard(){
             <input className='form-input'
               type="text" 
               id="cardNumber"
-              placeholder="XXXX XXXX XXXX XXXX" 
+              placeholder="XXXX XXXX XXXX " 
               name="cardNumber" 
               value={formData.cardNumber} 
               onChange={handleChange}
