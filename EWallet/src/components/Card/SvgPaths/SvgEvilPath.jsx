@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setActiveCard } from "../../../reducers/cardsReducer";
 import {useLocation} from 'react-router-dom';
@@ -17,7 +17,7 @@ const handleCardClick = (cardData) => {
 };*/
   
 
-const handleCardClick = () => {
+/*const handleCardClick = () => {
     dispatch(setActiveCard(formData));
 };
 
@@ -43,4 +43,4 @@ return(
 );
 }
 
-export default SvgEvilPath;
+export default SvgEvilPath;*/

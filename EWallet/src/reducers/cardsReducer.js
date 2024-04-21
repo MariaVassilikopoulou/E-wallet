@@ -28,10 +28,10 @@ console.log("Updated state:", state);
         card => card.cardNumber === cardNumber);
       if (cardIndex !== -1) {
         state.cards[cardIndex] = { ...state.cards[cardIndex], ...updatedData };
-        console.log("eeeleosprwro", cardIndex);
+        console.log("cardIndex1:", cardIndex);
         if (state.activeCardNumber === cardNumber) {
           state.activeCardNumber = "";}
-          console.log("eeeleos", cardIndex);
+          console.log("cardIndex2:", cardIndex);
       }},
     setActiveCard(state, action) {
       state.activeCardNumber = action.payload;
@@ -49,5 +49,5 @@ console.log("Updated state:", state);
 });
 
     export const { addCard, updateNewCard, setActiveCard } = cardsSlice.actions;
-
+  
     export default cardsSlice.reducer;

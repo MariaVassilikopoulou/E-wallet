@@ -1,4 +1,4 @@
-import React from 'react';
+/*/*import React from 'react';
 import './SvgBasic.css';
 import {useDispatch } from "react-redux";
 import { setActiveCard } from "../../../reducers/cardsReducer";
@@ -19,7 +19,7 @@ const location = useLocation();
 };*/
   
 
-const handleCardClick = () => {
+/*const handleCardClick = () => {
     dispatch(setActiveCard(formData));
 };
 
@@ -45,4 +45,4 @@ const handleCardClick = () => {
 </div>
 );
 }
-export default SvgNinjaPath;
+export default SvgNinjaPath;*/

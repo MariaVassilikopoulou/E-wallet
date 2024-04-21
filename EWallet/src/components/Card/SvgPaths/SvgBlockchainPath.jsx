@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import './SvgBasic.css';
 import { useDispatch} from "react-redux";
 import { setActiveCard } from "../../../reducers/cardsReducer";
@@ -18,7 +18,7 @@ const location = useLocation();
 };*/
 
   
-const handleCardClick = () => {
+/*const handleCardClick = () => {
     dispatch(setActiveCard(formData));
 };
     return(
@@ -47,4 +47,4 @@ const handleCardClick = () => {
     
 );
 }
-export default SvgBlockchainPath;
+export default SvgBlockchainPath;*/

@@ -17,7 +17,7 @@ function Home(){
   const [initialCardData, setInitialCardData] = useState(null); 
 
   const activeCardNumber  = useSelector((state) => state.cards);
-  
+  //const selectActiveCard = state => state.cards.activeCardNumber
   const dispatch = useDispatch();
   const navigateTo= useNavigate();
   const [vendor, setVendor] = useState(null);
@@ -36,14 +36,14 @@ function Home(){
             }
           }, [initialCardData]);
      
-        /*useEffect(() => {
+       /* useEffect(() => {
           setActiveCard(activeCardNumber ? cards.find(card => card.cardNumber === activeCardNumber) : null);
           setVendor(vendor);
         }, [activeCardNumber, cards]);
             console.log("useefect active", activeCard)*/
 
-            const filteredCards = activeCard
-            ? cards.filter((card) => card.cardNumber !== activeCard.cardNumber)
+            const filteredCards = activeCardNumber
+            ? cards.filter((card) => card.cardNumber !== activeCardNumber.cardNumber)
             : cards;
 
 
@@ -53,9 +53,9 @@ function Home(){
          <HeaderComponent/>
 
           <div className="credit-card">
-    
-          
-            {filteredCards.map((card) => (
+          {activeCard && <Card formData={activeCard} isActive={true} />}
+        
+        {filteredCards.map((card) => (
             <Card
               key={card.cardNumber}
               formData={card}

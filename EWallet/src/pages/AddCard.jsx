@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './AddCard.css';
-import SvgBasicPath from '../components/Card/SvgPaths/SvgBasicPath';
 import {useDispatch} from 'react-redux';
 import { addCard, updateNewCard, setActiveCard} from '../reducers/cardsReducer';
 import Card from '../components/Card/Card'
 import { useNavigate } from 'react-router-dom';
 import HeaderComponent from '../components/HeaderComponent';
-
 
 
 
@@ -49,10 +47,11 @@ function AddCard(){
     event.preventDefault();
    dispatch(addCard(formData));//it add the new card in redux
    console.log("this is the formdata", formData);
-    dispatch(updateNewCard({ cardNumber: formData.cardNumber, updatedData: formData }));
+    //dispatch(updateNewCard({ cardNumber: formData.cardNumber, updatedData: formData }));
     dispatch(setActiveCard(formData.cardNumber)); //the card is set as active card
     setFormData((prevFormData) =>({
       ...prevFormData,
+     
      
    }));
     navigateTo("/" );
@@ -64,8 +63,9 @@ function AddCard(){
         <section className='allForm' >
           <HeaderComponent/>
           <div className="credit-card" >
-          {formData.vendor ? <Card formData={formData} /> : 
-                              <SvgBasicPath formData={formData} />}
+          <Card formData={formData} />
+          {/* {formData.vendor ? <Card formData={formData} /> : 
+                              <SvgBasicPath formData={formData} />} */}
           </div>
           <form onSubmit={handleAddCard}  style={{marginTop:"10px", marginRight:"10px" }}>
           <div className="form-group">
