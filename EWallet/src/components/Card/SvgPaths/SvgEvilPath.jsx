@@ -1,32 +1,25 @@
-import React, {useState} from 'react';
-import {useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { setActiveCard } from "../../../reducers/cardsReducer";
+import {useLocation} from 'react-router-dom';
 
-function SvgEvilPath({formData, setCards }){
-    const { cardNumber, cardHolderName, validDates } = formData ;
+function SvgEvilPath({formData }){
+    const {  cardHolderName } = formData ;
 
 const dispatch = useDispatch();
-const [inputValue, setInputValue] = useState("");
-const [initialCardData, setInitialCardData] = useState(null); 
-const handleInputChange = (event) => {
-      setInputValue(event.target.value.slice(0, 16));
-};
-
-const formatCardNumber = (value) => {
-    return (value || "").padEnd(16, "X").slice(0, 16);
-};
-const formatDate=(value)=>{
-    return (value || "").padEnd(7, "X").slice(0,7);
-
-}
-
+const location = useLocation();
+/*const [ setInitialCardData] = useState(null); 
 const handleCardClick = (cardData) => {
     dispatch(setActiveCard(cardData));
     setInitialCardData(cardData);
     localStorage.setItem('initialCard', JSON.stringify(cardData));
-   
-};
+    
+};*/
   
+
+const handleCardClick = () => {
+    dispatch(setActiveCard(formData));
+};
 
 
 return(
@@ -36,27 +29,18 @@ return(
 </svg>
 <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">{formatCardNumber(cardNumber || cardNumber)}</h3>
-            <label>CARDHOLDER</label>
+            <h3 className="number">{formData.cardNumber}</h3>
+            <p>CARDHOLDER</p>
             <h4 className="name">{cardHolderName}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                   {formatDate(validDates || validDates)} 
-                   
+                   {(formData.inputValue || formData.validDates)} 
                 </div>
-    
     </div>
 </div>
     
-    
 );
-
-
-
-
 }
-
-
 
 export default SvgEvilPath;

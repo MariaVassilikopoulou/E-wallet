@@ -47,19 +47,15 @@ function AddCard(){
 
     const handleAddCard=(event)=>{
     event.preventDefault();
-   dispatch(addCard(formData));
+   dispatch(addCard(formData));//it add the new card in redux
    console.log("this is the formdata", formData);
     dispatch(updateNewCard({ cardNumber: formData.cardNumber, updatedData: formData }));
-    dispatch(setActiveCard(formData.cardNumber));
-    setFormData(prevFormData => ({
+    dispatch(setActiveCard(formData.cardNumber)); //the card is set as active card
+    setFormData((prevFormData) =>({
       ...prevFormData,
-      cardNumber: '',
-      cardHolderName: '',
-      validDates: '',
-      cvv: '',
-      vendor: '',
-    }));
-    navigateTo("/", { state: { formData } });
+     
+   }));
+    navigateTo("/" );
   };
 
  

@@ -1,37 +1,26 @@
-import React,{useState} from 'react';
+import React from 'react';
 import './SvgBasic.css';
-import { useSelector,useDispatch} from "react-redux";
+import { useDispatch} from "react-redux";
 import { setActiveCard } from "../../../reducers/cardsReducer";
 import {useLocation} from 'react-router-dom';
-function SvgBlockchainPath({formData, setCards }){
+function SvgBlockchainPath({formData }){
 
-    const { cardNumber, cardHolderName, validDates } = formData;
+    const {cardHolderName } = formData;
         
 const dispatch = useDispatch();
 const location = useLocation();
 
-const [inputValue, setInputValue] = useState("");
-const [initialCardData, setInitialCardData] = useState(null); 
-const handleInputChange = (event) => {
-      setInputValue(event.target.value.slice(0, 16));
-};
-
-const formatCardNumber = (value) => {
-    return (value || "").padEnd(16, "X").slice(0, 16);
-};
-const formatDate=(value)=>{
-    return (value || "").padEnd(7, "X").slice(0,7);
-
-}
-
-const handleCardClick = (cardData) => {
+/*const handleCardClick = (cardData) => {
     dispatch(setActiveCard(cardData));
     setInitialCardData(cardData);
     localStorage.setItem('initialCard', JSON.stringify(cardData));
     
-};
-  
+};*/
 
+  
+const handleCardClick = () => {
+    dispatch(setActiveCard(formData));
+};
     return(
        
 <div className='shape' onClick={() => handleCardClick(formData)} style={{ backgroundColor: "#8B58F9", color: "#eeeeee", marginTop: (formData.vendor === "BLOCK CHAIN INC" && location.pathname === "/") ? "-150px" : (formData.vendor === "BLOCK CHAIN INC" ? "0" : "") }}>
@@ -43,18 +32,17 @@ const handleCardClick = (cardData) => {
 
 <div className='card-details'>
         <div className='name-number'>
-            <h3 className="number">{formatCardNumber(cardNumber || cardNumber)}</h3>
-            <label>CARDHOLDER</label>
+            <h3 className="number">{formData.cardNumber}</h3>
+            <p>CARDHOLDER</p>
             <h4 className="name">{cardHolderName}</h4>
         </div>
                 <div className="valid-date">
                     <h6>VALID</h6>
-                   {formatDate(validDates || validDates)} 
-                   
+                   {(formData.inputValue || formData.validDates)} 
                 </div>
-    
     </div>
 </div>
+
     
     
 );

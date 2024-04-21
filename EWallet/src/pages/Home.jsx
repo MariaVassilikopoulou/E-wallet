@@ -11,73 +11,66 @@ function Home(){
 
   const location = useLocation();
   const formDataFromRedux = useSelector(state => state.cards);
- /* const [cards, setCards] = useState([formDataFromRedux]);*/
+  const cards = useSelector(state => state.cards.cards);// here i take the cards from the array i have in the redux
+  
   const [formData, setFormData] = useState({});
   const [initialCardData, setInitialCardData] = useState(null); 
-  console.log("koita edw",setInitialCardData);
-  const cardsState = useSelector((state) => state.cards);
-  const { cards,activeCardNumber } = cardsState;
+
+  const activeCardNumber  = useSelector((state) => state.cards);
+  
   const dispatch = useDispatch();
   const navigateTo= useNavigate();
- 
-  
-  
-  //const initialCard = useSelector(state => state.cards[0]);    
+  const [vendor, setVendor] = useState(null);
+   
   const [activeCard, setActiveCard] = useState(null);
-  //fetching the initial card
-        useEffect(() => {
-            const storedInitialCard = localStorage.getItem('initialCard');
-            if (storedInitialCard) {
-              setInitialCardData(JSON.parse(storedInitialCard)); 
-            }
-          }, []);
+
         
 
           useEffect(() => {
             if (initialCardData) {
               setFormData(initialCardData);
+              console.log("useefecthom3111", initialCardData)
               setActiveCard(initialCardData);
-              // dispatch(setActiveCard(initialCardData.cardNumber));
+              console.log("useefecthomw", initialCardData)
+              dispatch(setActiveCard(initialCardData.cardNumber));
             }
           }, [initialCardData]);
      
-          //reset the card
-        useEffect(() => {
-            return () => {
-              setFormData({});
-            };
-          }, []);
-         
-          
-          /*useEffect(() => {
-            if (activeCardNumber) {
-                const foundCard = cards.find(card => card.cardNumber === activeCardNumber);
-                setActiveCard(foundCard);
-            }
-        }, [activeCardNumber, cards]);*/
         /*useEffect(() => {
-          setActiveCard(activeCardNumber ? activeCardNumber : initialCard);
-        }, [activeCardNumber, initialCard]);*/
-        useEffect(() => {
           setActiveCard(activeCardNumber ? cards.find(card => card.cardNumber === activeCardNumber) : null);
+          setVendor(vendor);
         }, [activeCardNumber, cards]);
+            console.log("useefect active", activeCard)*/
+
+            const filteredCards = activeCard
+            ? cards.filter((card) => card.cardNumber !== activeCard.cardNumber)
+            : cards;
+
 
     return (
       <>
       <div className="home-container">
          <HeaderComponent/>
+
           <div className="credit-card">
-          {cards.map((card, index) => (
-          <Card key={index} formData={card} isActive={card.cardNumber === activeCardNumber} activeCardNumber={activeCardNumber} />
-           ))}
-          </div>
+    
           
+            {filteredCards.map((card) => (
+            <Card
+              key={card.cardNumber}
+              formData={card}
+              isActive={card && card.cardNumber === activeCardNumber}
+              activeCardNumber={activeCardNumber}
+              vendor={card && card.vendor} 
+            />
+          ))}
+        </div>
             <button className="homeButton" style={{marginTop:"10px" }} onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
          
       </div>
       </>
     );
-  }
+          }
   
 
 
