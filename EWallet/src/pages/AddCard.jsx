@@ -45,21 +45,32 @@ function AddCard(){
 
     const handleAddCard=(event)=>{
     event.preventDefault();
-   dispatch(addCard(formData));
+    if(
+      formData.cardNumber&&
+      formData.cardHolderName&&
+      formData.validDates&&
+      formData.cvv&&
+      formData.vendor
+    )
+   {dispatch(addCard(formData));
    console.log("this is the formdata", formData);
-    
-    dispatch(setActiveCard(formData.cardNumber)); 
+    setFormData({
+      cardNumber:'',
+      cardHolderName:'',
+      validDates:'',
+      cvv:'',
+      vendor:''
+    });
+    /*dispatch(setActiveCard(formData.cardNumber)); 
     setFormData((prevFormData) =>({
       ...prevFormData,
       cardNumber: formData.cardNumber,
       cardHolderName: formData.cardHolderName,
       validDates: formData.validDates,
       cvv: formData.cvv,
-      vendor: formData.vendor ,
-     
-     
-   }));
+      vendor: formData.vendor ,*/
     navigateTo("/" );
+   };
   };
 
  
@@ -68,7 +79,7 @@ function AddCard(){
         <section className='allForm' >
           <HeaderComponent/>
           <div className="credit-card" >
-          <Card formData={formData} />
+          <Card formData={formData} style={{ marginBottom: '20px' }}/>
           {/* {formData.vendor ? <Card formData={formData} /> : 
                               <SvgBasicPath formData={formData} />} */}
           </div>

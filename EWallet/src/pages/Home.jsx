@@ -23,7 +23,7 @@ function Home(){
   const [vendor, setVendor] = useState(null);
    
   const [activeCard, setActiveCard] = useState(null);
-
+const [secondCardAdded, setSecondCardAdded]= useState(null);
         
 
           useEffect(() => {
@@ -44,14 +44,32 @@ function Home(){
               );
             }, [activeCardNumber, cards]);
 
+const addSecondCard=()=>{
+  setSecondCardAdded(true);
+}
+
+const shouldApplyCustomStyle = true; 
+
+const customStyle = shouldApplyCustomStyle ? { marginBottom: '220px' } : {};
+
+
+
     return (
       <>
       <div className="home-container">
          <HeaderComponent/>
        
-          <div className="credit-card" >
-          {activeCard && <Card formData={activeCard} isActive={true} />}
+         <div className="credit-card" >
+          {activeCard && <Card formData={activeCard} isActive={true} style={customStyle} />}
         
+       {/* {secondCardAdded && (
+        <div className="credit-card">
+        {activeCardNumber  && <Card formData={activeCard} isActive={true} 
+          
+          />}*/}
+        
+     
+
           {cards
           .filter((card) => card.cardNumber !== activeCardNumber)
           .map((card, index) => (
@@ -65,7 +83,7 @@ function Home(){
         </div>
             <button className="homeButton" style={{marginTop:"10px" }} onClick={() =>  navigateTo('/card')}>ADD A NEW CARD</button>
          
-      </div>
+            </div>
       </>
     );
           }

@@ -7,7 +7,7 @@ import NingaLogo from "../../assets/vendor-ninja.svg";
 import { useDispatch } from 'react-redux';
 import { setActiveCard } from '../../reducers/cardsReducer';
 import ChipLight from '../../assets/chip-light.svg';
-function Card({ formData }) {
+function Card({ formData, style }) {
     const dispatch = useDispatch();
 
     const handleClick = () => {
@@ -28,7 +28,7 @@ function Card({ formData }) {
     const { logo: CardLogo, backgroundColor } = cardLogos[formData.vendor || defaultVendor];
 
     return (
-        <div className="shape" onClick={handleClick} style={{ backgroundColor }}>
+        <div className="shape" onClick={handleClick} style={{  ...style, backgroundColor }}>
             <div className="vendor">
               
                 {CardLogo && <img className="vendor-logo" src={CardLogo} alt={formData.vendor} />}
